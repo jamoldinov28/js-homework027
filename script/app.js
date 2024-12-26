@@ -1,11 +1,9 @@
 const locationEl = document.querySelector(".content__location")
 const imgEl = document.querySelector(".content__image img")
 const tempEl = document.querySelector(".content__main p")
-const temp2El = document.querySelector(".temp2")
-const temp3El = document.querySelector(".temp3")
-const temp4El = document.querySelector(".temp4")
-const temp5El = document.querySelector(".temp5")
-const cardWrapperEl = document.querySelector(".card__wrapper")
+const formEl = document.querySelector(".form")
+const inputEl = document.querySelector(".form__input")
+
 
 const cardtime1 = document.querySelector(".card__time1")
 const cardtime2 = document.querySelector(".card__time2")
@@ -32,18 +30,15 @@ const topicbodies4El = document.querySelector(".topic__bodies4")
 const topicbodies5El = document.querySelector(".topic__bodies5")
 const topicbodies6El = document.querySelector(".topic__bodies6")
 
-const BASE_URL = "https://api.weatherapi.com/v1/forecast.json?key=d225234130be46288aa55338242412&q=moscow&days=7&aqi=yes&alerts=yes"
+const BASE_URL = ""
 async function fetchWeather(city){
-    const response = await fetch(BASE_URL)
+    const response = await fetch(`https://api.weatherapi.com/v1/forecast.json?key=d225234130be46288aa55338242412&q=${city}&days=7&aqi=yes&alerts=yes`)
     response
         .json()
         .then(res => {
             console.log(res);
             tempEl.textContent = res.current.temp_c + "°";
-            temp2El.textContent = res.current.temp_f + "°";                     
-            temp3El.textContent = res.current.wind_kph;
-            temp4El.textContent = res.current.precip_mm;
-            temp5El.textContent = res.current.uv;
+        
             imgEl.src = res.current.condition.icon;
             locationEl.textContent = `${res.location.name}${res.location.country}`; 
 
@@ -52,15 +47,11 @@ async function fetchWeather(city){
             cardtime3.textContent = res.forecast.forecastday[0].astro.sunrise;
             cardtime4.textContent =  res.forecast.forecastday[0].astro.moonset;
 
-     
-
-        
             cardImgEl.src =  res.forecast.forecastday[0].hour[4].condition.icon;
             cardimageEl.src =  res.forecast.forecastday[0].hour[9].condition.icon; 
             cardimg.src =  res.forecast.forecastday[0].hour[13].condition.icon; 
             cardimage.src =  res.forecast.forecastday[0].hour[12].condition.icon; 
-            
-
+        
             topicimg1El.src =  res.forecast.forecastday[0].day.condition.icon;
             topicimg2El.src =  res.forecast.forecastday[1].day.condition.icon;
             topicimg3El.src =  res.forecast.forecastday[2].day.condition.icon;
@@ -80,31 +71,11 @@ async function fetchWeather(city){
 }
 
 window.onload = ()=> {
-    fetchWeather()
+    fetchWeather("Toshkent")
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+formEl.addEventListener("submit", e =>{
+    e.preventDefault()
+    fetchWeather(inputEl.value)
+    inputEl.value = ""
+})
