@@ -10,10 +10,10 @@
     padding: 0 16px;
     margin: 0 auto;
 }
-
-.main{
+body{
     background: #000;
-    height: 100vh;
+}
+.main{
     color: #fff;
 }
 .content__form{
@@ -53,7 +53,6 @@
 }
 .content__wrapper{
     display: flex;
-
     gap: 20px;
     align-items: center;
     justify-content: center;
@@ -73,6 +72,7 @@
 .card__wrapper{
     justify-content: center;
     display: flex;
+    flex-wrap: wrap;
     gap: 30px;
 }
 .card{
@@ -88,11 +88,31 @@
 .topic__wrapper{
     display: flex;
     gap: 50px;
-    overflow: auto;
     text-align: center;
     line-height: 40px;
     justify-content: center;
+    flex-wrap: wrap;
 }
-.topic__wrapper::-webkit-scrollbar{
-    width: 0;
+
+
+
+@media (max-width: 1027px) {
+    .form__input{
+        width: 300px;
+    }
+    p{
+        font-style: 10px;
+        line-height: 20px;
+    }
+}
+@media (max-width: 467px) {
+    .content__location{
+        font-size: 16px;
+    }
+    p{
+        font-size: 13px;
+    }
+    .content__image> img{
+        width: 100px;
+    }
 }
